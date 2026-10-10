@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Student Details</title>
+</head>
+
+<body>
+
+    <h2>College Student Registration</h2>
+
+    <form onsubmit="return checkDetails()">
+
+        <label>Enrollment No.:</label><br>
+        <input type="text" id="enrollNo"><br><br>
+
+        <label>Full Name:</label><br>
+        <input type="text" id="fullName"><br><br>
+
+        <label>Email Address:</label><br>
+        <input type="text" id="emailId"><br><br>
+
+        <label>Create Password:</label><br>
+        <input type="password" id="pass"><br><br>
+
+        <label>Re-enter Password:</label><br>
+        <input type="password" id="repass"><br><br>
+
+        <label>Mobile Number:</label><br>
+        <input type="text" id="mobile" maxlength="10"><br><br>
+
+        <label>Residential Address:</label><br>
+        <textarea id="homeAddress" rows="3" cols="25"></textarea><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+        <br><br>
+
+        <label>Select Branch:</label><br>
+        <select id="course">
+            <option value="">Choose a branch</option>
+            <option value="CE">Computer Engineering</option>
+            <option value="IT">Information Technology</option>
+            <option value="EC">Electronics</option>
+            <option value="ME">Mechanical Engineering</option>
+            <option value="CV">Civil Engineering</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Register</button>
+        <button type="reset">Clear Form</button>
+
+    </form>
+
+    <script>
+        function checkDetails() {
+
+            let enrollmentNo = document.getElementById("enrollNo").value.trim();
+            let studentName = document.getElementById("fullName").value.trim();
+            let emailAddress = document.getElementById("emailId").value.trim();
+            let pwd = document.getElementById("pass").value;
+            let confirmPwd = document.getElementById("repass").value;
+            let mobileNo = document.getElementById("mobile").value.trim();
+            let address = document.getElementById("homeAddress").value.trim();
+            let selectedGender = document.querySelector('input[name="gender"]:checked');
+            let selectedBranch = document.getElementById("course").value;
+
+            if (!enrollmentNo || !studentName || !emailAddress ||
+                !pwd || !confirmPwd || !mobileNo || !address ||
+                !selectedGender || !selectedBranch) {
+
+                alert("Please complete every field.");
+                return false;
+            }
+
+            if (!/^[A-Za-z ]+$/.test(studentName)) {
+                alert("Enter a name using letters and spaces only.");
+                return false;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress)) {
+                alert("Enter a valid email address.");
+                return false;
+            }
+
+            if (pwd.length < 6) {
+                alert("Password must have at least 6 characters.");
+                return false;
+            }
+
+            if (pwd !== confirmPwd) {
+                alert("Both passwords must be identical.");
+                return false;
+            }
+
+            if (!/^[0-9]{10}$/.test(mobileNo)) {
+                alert("Enter a mobile number containing 10 digits.");
+                return false;
+            }
+
+            alert("Registration completed successfully!");
+            return false;
+        }
+    </script>
+
+</body>
+</html>
